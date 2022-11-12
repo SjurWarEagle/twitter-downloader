@@ -1,7 +1,7 @@
 version: "2.0"
 services:
   twitterDownloader:
-    image: "wareagledocker/chat-reaction:latest"
+    image: "wareagledocker/twitter-downloader:latest"
     ports:
       - "80:98"
     environment:
