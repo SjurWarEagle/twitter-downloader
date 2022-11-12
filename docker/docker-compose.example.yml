@@ -1,0 +1,10 @@
+version: "2.0"
+services:
+  twitterDownloader:
+    image: "wareagledocker/chat-reaction:latest"
+    ports:
+      - "80:98"
+    environment:
+        - SERVER_PORT=3500
+        - CLIENT_ID=CLIENT_IDCLIENT_IDCLIENT_IDCLIENT_ID
+        - CLIENT_SECRET=CLIENT_SECRETCLIENT_SECRETCLIENT_SECRETCLIENT_SECRET
