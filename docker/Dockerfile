@@ -5,6 +5,7 @@ RUN mkdir -p /project/images
 
 COPY . /project
 COPY docker/scripts/start_all.sh /project
+RUN chmod 777 docker/scripts/start_all.sh
 WORKDIR /project
 
 RUN mvn clean package
