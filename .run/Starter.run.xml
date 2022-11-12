@@ -1,0 +1,35 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Starter" type="Application" factoryName="Application">
+    <option name="ALTERNATIVE_JRE_PATH" value="BUNDLED" />
+    <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+    <envs>
+      <env name="CONFIG_FILE" value="E:\IdeaProjects\twitter-downloader\config\config_private.json" />
+    </envs>
+    <option name="MAIN_CLASS_NAME" value="de.tkunkel.twitterImageDownloader.Starter" />
+    <module name="twitterImageDownloader" />
+    <extension name="software.aws.toolkits.jetbrains.core.execution.JavaAwsConnectionExtension">
+      <option name="credential" />
+      <option name="region" />
+      <option name="useCurrentConnection" value="false" />
+    </extension>
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+  <configuration default="false" name="Starter" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+    <option name="ACTIVE_PROFILES" />
+    <envs>
+      <env name="CONFIG_FILE" value="E:\IdeaProjects\twitter-downloader\config\config_private.json" />
+    </envs>
+    <module name="twitterImageDownloader" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="de.tkunkel.twitterImageDownloader.Starter" />
+    <extension name="software.aws.toolkits.jetbrains.core.execution.JavaAwsConnectionExtension">
+      <option name="credential" />
+      <option name="region" />
+      <option name="useCurrentConnection" value="false" />
+    </extension>
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

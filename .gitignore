@@ -1,0 +1,13 @@
+src/main/resources/mobiledatausage.p12
+*iml
+.idea
+
+/target/
+/tokens/
+/images/
+/training_data/
+
+config/config_private.json
+config/mobiledatausage.p12
+data/
+**/*/.lck
