@@ -1,5 +1,4 @@
 #nginx -g daemon off
-service nginx restart
-cd /project/server/dist/server/src
+cd /project
 #TODO do not use src folder build build, that requires less space and tools
-node main
+java -jar target/twitterImageDownloader-1.0-SNAPSHOT.jar

@@ -10,10 +10,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 import twitter4j.*;
 import twitter4j.conf.ConfigurationBuilder;
 
-import javax.annotation.PostConstruct;
 import java.io.*;
 import java.net.URL;
 import java.nio.file.Files;
@@ -33,9 +33,14 @@ public class Starter {
         SpringApplication.run(Starter.class, args);
     }
 
-    @PostConstruct
-    private void start() throws InterruptedException, IOException {
+    //at start and once per hour
+    @Scheduled(fixedRate = 60 * 60 * 1000)
+    public void regularly() throws InterruptedException, IOException {
+        start();
+    }
 
+    //    @PostConstruct
+    private void start() throws InterruptedException, IOException {
         ConfigurationBuilder cb = new ConfigurationBuilder();
         cb.setOAuthConsumerKey(configuration.twitterOAuthConsumerKey);
         cb.setOAuthConsumerSecret(configuration.twitterOAuthConsumerSecret);
@@ -88,12 +93,13 @@ public class Starter {
             for (MediaEntity mediaEntity : status.getMediaEntities()) {
 //                executor.submit(() -> {
                 downloadMedia(mediaEntity.getMediaURL(), mediaEntity.getId() + "");
-                rememberMetaData(metaInfo, status, mediaEntity.getId(), mediaEntity.getMediaURL());
+                rememberMetaData(metaInfo, status, mediaEntity.getId());
 //                });
             }
         }
 
         executor.shutdown();
+        //noinspection ResultOfMethodCallIgnored
         executor.awaitTermination(1, TimeUnit.HOURS);
         BufferedWriter bufferedWriter = Files.newBufferedWriter(Paths.get(configuration.imageMetadataFile));
         bufferedWriter.write(gson.toJson(metaInfo));
@@ -102,11 +108,11 @@ public class Starter {
         bufferedWriter.close();
     }
 
-    private void rememberMetaData(MetaInfo metaInfo, Status status, long mediaId, String mediaURL) throws IOException {
+    private void rememberMetaData(MetaInfo metaInfo, Status status, long mediaId) {
         MetaInfoImage newInfo = new MetaInfoImage();
         metaInfo.info.add(newInfo);
 
-        String postingText = status.getText().replaceAll("((https?|ftp|gopher|telnet|file|Unsure|http):((//)|(\\\\))+[\\w\\d:#@%/;$()~_?\\+-=\\\\\\.&]*)", "").trim();
+        String postingText = status.getText().replaceAll("((https?|ftp|gopher|telnet|file|Unsure|http):((//)|(\\\\))+[\\w\\d:#@%/;$()~_?+-=\\\\.&]*)", "").trim();
 
         newInfo.mediaId = mediaId + "";
         newInfo.twitterId = status.getId() + "";
@@ -121,7 +127,7 @@ public class Starter {
             InputStream in = new BufferedInputStream(url.openStream());
             ByteArrayOutputStream out = new ByteArrayOutputStream();
             byte[] buf = new byte[1024];
-            int n = 0;
+            int n;
             while (-1 != (n = in.read(buf))) {
                 out.write(buf, 0, n);
             }

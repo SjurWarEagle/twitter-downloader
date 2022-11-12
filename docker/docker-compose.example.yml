@@ -1,10 +1,9 @@
 version: "2.0"
 services:
-  twitterDownloader:
+  twitter-downloader:
     image: "wareagledocker/twitter-downloader:latest"
-    ports:
-      - "80:98"
     environment:
-        - SERVER_PORT=3500
-        - CLIENT_ID=CLIENT_IDCLIENT_IDCLIENT_IDCLIENT_ID
-        - CLIENT_SECRET=CLIENT_SECRETCLIENT_SECRETCLIENT_SECRETCLIENT_SECRET
+      - CONFIG_FILE=/project/config.json
+    volumes:
+      - E:\IdeaProjects\twitter-downloader\config\config_private.json:/project/config.json:ro
+      - E:\IdeaProjects\twitter-downloader\images:/project/images:z
