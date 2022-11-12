@@ -29,14 +29,14 @@ jobs:
       -
         name: git checkout
         uses: actions/checkout@v2
-      -
-        name: push README to Dockerhub
-        uses: christian-korneck/update-container-description-action@v1
-        env:
-          DOCKER_USER: ${{ secrets.DOCKERHUB_USERNAME }}
-          DOCKER_PASS: ${{ secrets.DOCKERHUB_PASSWORD }}
-        with:
-          destination_container_repo: wareagledocker/twitter-downloader
-          provider: dockerhub
-          short_description: 'A small collection of helper tools '
-          readme_file: 'README.md'
+#      -
+#        name: push README to Dockerhub
+#        uses: christian-korneck/update-container-description-action@v1
+#        env:
+#          DOCKER_USER: ${{ secrets.DOCKERHUB_USERNAME }}
+#          DOCKER_PASS: ${{ secrets.DOCKERHUB_PASSWORD }}
+#        with:
+#          destination_container_repo: wareagledocker/twitter-downloader
+#          provider: dockerhub
+#          short_description: 'A small collection of helper tools '
+#}          readme_file: 'README.md'
